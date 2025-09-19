@@ -23,18 +23,26 @@ Please be patient I should be back up in a few days\\."""
 async def maintenance_reply(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Send maintenance message for any interaction"""
     try:
-        # Check if bot is mentioned or if it's a DM
+        # Get the message
         message = update.message or update.edited_message
-        if not message:
+        if not message or not message.text:
             return
 
-        # In groups, only respond if mentioned
-        if message.chat.type != 'private':
-            # Check if bot is mentioned
-            if message.text:
-                bot_username = (await context.bot.get_me()).username
-                if f'@{bot_username}' not in message.text:
-                    return
+        # Get bot username
+        bot_username = (await context.bot.get_me()).username
+
+        # ONLY respond if:
+        # 1. It's a private DM to the bot, OR
+        # 2. The bot is explicitly mentioned with @
+        if message.chat.type == 'private':
+            # It's a DM, respond
+            pass
+        elif f'@{bot_username}' in message.text:
+            # Bot is mentioned, respond
+            pass
+        else:
+            # Not a DM and not mentioned - stay quiet
+            return
 
         # Send the maintenance message with MarkdownV2 formatting
         await message.reply_text(
