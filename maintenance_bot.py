@@ -17,7 +17,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Your maintenance message with strikethrough
-MAINTENANCE_MESSAGE = """Lord Josh is \\~breaking my BALZ\\~ updating me now\\.
+MAINTENANCE_MESSAGE = """Lord Josh is ~breaking my BALZ~ updating me now\\.
 Please be patient I should be back up in a few days\\."""
 
 async def maintenance_reply(update: Update, context: ContextTypes.DEFAULT_TYPE):
